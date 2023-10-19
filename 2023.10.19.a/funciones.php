@@ -128,7 +128,7 @@ function actualizar_sitio($sitio, $documento)
 }
 
 
-function mostrar_sitio($documento)
+function mostrar_sitio($documento,$frase)
 {
     $salida = "";  // Variable para almacenar el resultado de la consulta
     $conexion = mysqli_connect('localhost', 'root', 'root', 'practica_');  // Conectar a la base de datos
@@ -139,7 +139,7 @@ function mostrar_sitio($documento)
 
     while ($fila = mysqli_fetch_assoc($resultado)) {
         $salida .= "<a href='" . $fila['sitio'] . "'>";  // Construye un enlace con el valor de 'sitio'
-        $salida .= "Ve a mi sitio";  // Texto del enlace
+        $salida .= "$frase";  // Texto del enlace
         $salida .= "</a>";  // Cierra el enlace
     }
 
