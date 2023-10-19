@@ -105,3 +105,36 @@ function borrar_usuario($documento)
     $conexion->close();  // Cerrar la conexión a la base de datos
     return $salida;  // Devolver el mensaje de salida
 }
+
+
+function actualizar_sitio($sitio,$documento){
+    $salida = "";
+    $conexion = $conexion = mysqli_connect('localhost', 'root', 'root', 'practica_'); 
+
+    $sql = "update usuarios set sitio = '$sitio' where documento = '$documento'";
+    $resultado = $conexion ->query($sql);
+    if ($resultado){
+        $salida="actualizaste tu sitio con exito";
+    }else{
+        $salida="Error al eliminar, intentelo de nuevo" .$conexion->error;
+    }
+
+    $conexion->close();
+    return $salida;
+}
+
+function mostrar_sitio($documento){
+    $salida = "";
+    $conexion = $conexion = mysqli_connect('localhost', 'root', 'root', 'practica_'); 
+
+    $sql = "select sitio from usuarios as sitio where documento='$documento'";
+    $resultado = $conexion ->query($sql);
+
+    while ($fila = mysqli_fetch_assoc($resultado)) {  
+        $salida = $fila['sitio'];  
+    }
+
+    $conexion->close();
+    return $salida;
+}
+
