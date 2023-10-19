@@ -1,14 +1,18 @@
-<?php                                                          
-    function consulta(){                                     //se crea una funcion 
-        $salida= 0;                                          //se inicializa la variable 
-        $salida= 10*2/2;                                     //calcula el area del triangulo 
+<?php
+function consulta()
+{                                     //se crea una funcion 
+    $salida = 0;                                          //se inicializa la variable 
+    $conexion = mysqli_connect('localhost', 'root', 'root', 'practica_');  //conectar con una base de datos
+    $sql = "select 2+1";
+    $sql .= " as suma";                                 // calcula la suma
+    $resultado = $conexion->query($sql);               //muestra resultado
 
-        return $salida;                                     //retorna la opreacion
-    }                                                            // se cierra la funcion 
+    while ($fila = mysqli_fetch_assoc($resultado)) {
 
-    function calcular(){                                    //se crea una funcion
-        $salida= 0;                                         //se inicializa la variable 
-        $salida= 4*4;                                       //calcular el area del cuadrado
+        $salida+=$fila['suma'];
+    }
 
-        return $salida;                                     //retorna la operacion
-    }                                                       //se cierra la funcion
+
+
+    return $salida;                                        //retorna la opreacion
+}                                                            // se cierra la funcion 
