@@ -128,7 +128,7 @@ function actualizar_sitio($sitio, $documento)
 }
 
 
-function mostrar_sitio($documento,$frase)
+function mostrar_sitio($documento, $frase)
 {
     $salida = "";  // Variable para almacenar el resultado de la consulta
     $conexion = mysqli_connect('localhost', 'root', 'root', 'practica_');  // Conectar a la base de datos
@@ -138,9 +138,19 @@ function mostrar_sitio($documento,$frase)
     $resultado = $conexion->query($sql);  // Ejecutar la consulta SQL
 
     while ($fila = mysqli_fetch_assoc($resultado)) {
-        $salida .= "<a href='" . $fila['sitio'] . "'>";  // Construye un enlace con el valor de 'sitio'
-        $salida .= "$frase";  // Texto del enlace
-        $salida .= "</a>";  // Cierra el enlace
+        $sitio = $fila['sitio'];
+
+        // Construir la consulta SQL para actualizar la columna 'bienvenida' en la tabla 'usuarios'
+        $sql1 = "UPDATE usuarios SET bienvenida = '$frase' WHERE documento = '$documento'";
+        $resultado1 = $conexion->query($sql1);  // Ejecutar la consulta SQL de actualización
+
+        if ($resultado1) {
+            $salida .= "<a href='" . $sitio . "'>";  // Construye un enlace con el valor de 'sitio'
+            $salida .= $frase;  // Texto del enlace (bienvenida)
+            $salida .= "</a>";  // Cierra el enlace
+        } else {
+            $salida = "Error al actualizar la bienvenida: " . $conexion->error;
+        }
     }
 
     $conexion->close();  // Cerrar la conexión a la base de datos
