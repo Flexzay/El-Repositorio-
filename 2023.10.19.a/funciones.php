@@ -127,17 +127,20 @@ function actualizar_sitio($sitio, $documento)
     return $salida;  // Devolver el mensaje de salida
 }
 
+
 function mostrar_sitio($documento)
 {
     $salida = "";  // Variable para almacenar el resultado de la consulta
     $conexion = mysqli_connect('localhost', 'root', 'root', 'practica_');  // Conectar a la base de datos
 
-    // Construir la consulta SQL para obtener el campo 'sitio' de la tabla 'usuarios' para un usuario específico
+    // Construir la consulta SQL para obtener el campo 'sitio' de la tabla 'usuarios'
     $sql = "SELECT sitio FROM usuarios WHERE documento='$documento'";
     $resultado = $conexion->query($sql);  // Ejecutar la consulta SQL
 
     while ($fila = mysqli_fetch_assoc($resultado)) {
-        $salida = $fila['sitio'];  // Almacena el valor de 'sitio' en la variable de salida
+        $salida .= "<a href='" . $fila['sitio'] . "'>";  // Construye un enlace con el valor de 'sitio'
+        $salida .= "Ve a mi sitio";  // Texto del enlace
+        $salida .= "</a>";  // Cierra el enlace
     }
 
     $conexion->close();  // Cerrar la conexión a la base de datos
