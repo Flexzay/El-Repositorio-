@@ -1,3 +1,8 @@
 <?php
+    function coonsulta(){                                 //se crea una funcion 
+        $salida= 0;                                     //se inicializa la variable 
+        $salida= 10*2/2;                                //calcula el area del triangulo 
 
-echo "hola";  //imprimir mensaje que aparece en despliegue por el include 
+
+        return $salida;                                  //retorna la opreacion
+    }                                                     // se cierra la funcion 
