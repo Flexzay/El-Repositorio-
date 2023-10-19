@@ -107,34 +107,39 @@ function borrar_usuario($documento)
 }
 
 
-function actualizar_sitio($sitio,$documento){
-    $salida = "";
-    $conexion = $conexion = mysqli_connect('localhost', 'root', 'root', 'practica_'); 
+function actualizar_sitio($sitio, $documento)
+{
+    $salida = "";  // Variable para almacenar el mensaje de salida
+    $conexion = mysqli_connect('localhost', 'root', 'root', 'practica_');  // Conectar a la base de datos
 
-    $sql = "update usuarios set sitio = '$sitio' where documento = '$documento'";
-    $resultado = $conexion ->query($sql);
-    if ($resultado){
-        $salida="actualizaste tu sitio con exito";
-    }else{
-        $salida="Error al eliminar, intentelo de nuevo" .$conexion->error;
+    // Construir la consulta SQL para actualizar el campo 'sitio' en la tabla 'usuarios'
+    $sql = "UPDATE usuarios SET sitio = '$sitio' WHERE documento = '$documento'";
+    $resultado = $conexion->query($sql);  // Ejecutar la consulta SQL
+
+    // Verificar si la consulta fue exitosa
+    if ($resultado) {
+        $salida = "Actualizaste tu sitio con éxito";  // Mensaje de éxito
+    } else {
+        $salida = "Error al actualizar, inténtelo de nuevo: " . $conexion->error;  // Mensaje de error
     }
 
-    $conexion->close();
-    return $salida;
+    $conexion->close();  // Cerrar la conexión a la base de datos
+    return $salida;  // Devolver el mensaje de salida
 }
 
-function mostrar_sitio($documento){
-    $salida = "";
-    $conexion = $conexion = mysqli_connect('localhost', 'root', 'root', 'practica_'); 
+function mostrar_sitio($documento)
+{
+    $salida = "";  // Variable para almacenar el resultado de la consulta
+    $conexion = mysqli_connect('localhost', 'root', 'root', 'practica_');  // Conectar a la base de datos
 
-    $sql = "select sitio from usuarios as sitio where documento='$documento'";
-    $resultado = $conexion ->query($sql);
+    // Construir la consulta SQL para obtener el campo 'sitio' de la tabla 'usuarios' para un usuario específico
+    $sql = "SELECT sitio FROM usuarios WHERE documento='$documento'";
+    $resultado = $conexion->query($sql);  // Ejecutar la consulta SQL
 
-    while ($fila = mysqli_fetch_assoc($resultado)) {  
-        $salida = $fila['sitio'];  
+    while ($fila = mysqli_fetch_assoc($resultado)) {
+        $salida = $fila['sitio'];  // Almacena el valor de 'sitio' en la variable de salida
     }
 
-    $conexion->close();
-    return $salida;
+    $conexion->close();  // Cerrar la conexión a la base de datos
+    return $salida;  // Devolver el resultado de la operación
 }
-
