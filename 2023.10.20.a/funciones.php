@@ -8,7 +8,7 @@
  * @param int $n Número para controlar el tipo de consulta. (Opcional, por defecto es 1).
  * @return string Devuelve una cadena con los valores de la tabla 'usuarios' separados por saltos de línea.
  */
-function consulta($u = null, $c = null, $n = 1)
+function consulta($u = null, $c = null, $z =1,$n = 1)
 {
     // Se inicializa una variable para acumular los resultados.
     $salida = "";
@@ -27,7 +27,9 @@ function consulta($u = null, $c = null, $n = 1)
         // Si se proporcionan tanto el documento como la contraseña, se realiza una consulta adicional con ambas condiciones.
         if ($u != null && $c != null) {
             $sql = "SELECT * FROM usuarios WHERE documento='$u' AND clave='$c'";
-        }
+        }else if($z !=1){
+            $sql= "select * from usuarios limit $z";
+        };
     } else if ($n != 1) {
         // Consulta de recuento para obtener el número total de registros en la tabla 'usuarios'.
         $sql = "SELECT count(*) FROM usuarios";
